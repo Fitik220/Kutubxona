@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import BookCard from "../components/BookCard";
+import { useAppPreferences } from "../components/AppPreferencesProvider";
 
 const demoBook = {
   id: "demo-card",
@@ -14,18 +15,20 @@ const demoBook = {
 };
 
 export default function CardPreviewPage() {
+  const { t } = useAppPreferences();
+  
   return (
     <div className="min-h-screen px-4 pb-12 pt-[96px]">
       <div className="section-shell">
         <div className="surface-card rounded-[2rem] p-6 sm:p-8">
           <Link href="/" className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-700 transition hover:opacity-70">
-            ← Bosh sahifaga qaytish
+            ← {t.backHome}
           </Link>
           <h1 className="mt-4 text-3xl font-black tracking-tight text-[#24180d] sm:text-4xl">
-            Card Preview
+            {t.cardPreviewTitle}
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-7 text-[#6f6559]">
-            Bu sahifa endi test va preview uchun xavfsiz variant. Avval shu route ichida komponentning o'zi yotgani sabab build yiqilayotgan edi.
+            {t.cardPreviewText}
           </p>
         </div>
 

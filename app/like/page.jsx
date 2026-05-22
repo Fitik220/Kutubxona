@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import BookCard from "../components/BookCard";
+import { useAppPreferences } from "../components/AppPreferencesProvider";
 
 export default function LikePage() {
+  const { t } = useAppPreferences();
   const [likedBooks, setLikedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +34,7 @@ export default function LikePage() {
       <div className="flex min-h-screen items-center justify-center px-4 pt-[96px]">
         <div className="flex flex-col items-center gap-4">
           <div className="h-12 w-12 animate-spin rounded-full border-t-4 border-solid border-yellow-500"></div>
-          <p className="font-medium text-gray-500">Yuklanmoqda...</p>
+          <p className="font-medium text-gray-500">{t.loading}</p>
         </div>
       </div>
     );
@@ -45,12 +47,12 @@ export default function LikePage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex items-end gap-4">
               <h1 className="text-4xl font-black uppercase tracking-tighter text-gray-900">
-                Saralanganlar
+                {t.favoritesTitle}
               </h1>
               <div className="mb-2 h-2 w-2 rounded-full bg-yellow-500"></div>
             </div>
             <span className="text-lg font-bold text-gray-500">
-              {likedBooks.length} ta kitob
+              {likedBooks.length} {t.booksCount}
             </span>
           </div>
         </div>
@@ -64,8 +66,8 @@ export default function LikePage() {
         ) : (
           <div className="surface-card flex flex-col items-center justify-center rounded-[2rem] py-16 text-center sm:py-20">
             <div className="mb-4 text-6xl">❤</div>
-            <h2 className="text-2xl font-bold text-gray-900">Hali hech nima yo'q</h2>
-            <p className="mt-2 text-gray-500">Yoqtirgan kitoblaringiz shu yerda ko'rinadi.</p>
+            <h2 className="text-2xl font-bold text-gray-900">{t.emptyFavoritesTitle}</h2>
+            <p className="mt-2 text-gray-500">{t.emptyFavoritesText}</p>
           </div>
         )}
       </div>

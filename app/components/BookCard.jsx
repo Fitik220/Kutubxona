@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { PiBookmarkSimpleLight } from "react-icons/pi";
 import { IoBookmarkSharp } from "react-icons/io5";
+import { useAppPreferences } from './AppPreferencesProvider';
 
 export default function BookCard({ book }) {
+  const { t } = useAppPreferences();
   const [openAudio, setOpenAudio] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(book?.like || false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +42,7 @@ export default function BookCard({ book }) {
       setIsBookmarked(updatedBook.like);
     } catch (error) {
       console.error("API error:", error);
-      alert("Saqlashda xatolik yuz berdi. Internet aloqasini tekshirib qayta urinib ko'ring.");
+      alert(t.bookCardAudioError);
     } finally {
       setLoading(false);
     }
@@ -82,7 +84,7 @@ export default function BookCard({ book }) {
         <div className="mt-auto flex flex-col gap-2">
           <Link href={`/books/${book.id}`} className="w-full">
             <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1A1A1A] py-3.5 font-semibold text-white transition-colors hover:bg-black">
-              Ko'rish
+              {t.bookCardView}
             </button>
           </Link>
 
@@ -90,7 +92,7 @@ export default function BookCard({ book }) {
             onClick={() => setOpenAudio(true)}
             className="flex w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-gray-50 py-3.5 font-semibold text-gray-700 transition-all hover:border-orange-100 hover:bg-orange-50 hover:text-orange-600"
           >
-            Audio tinglash
+            {t.bookCardAudio}
           </button>
         </div>
       </div>

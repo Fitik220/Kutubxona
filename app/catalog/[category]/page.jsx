@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import BookCard from "@/app/components/BookCard";
 import Link from "next/link";
+import { useAppPreferences } from "@/app/components/AppPreferencesProvider";
 
 export default function CategoryPage() {
+  const { t } = useAppPreferences();
   const { category } = useParams();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,17 +56,17 @@ export default function CategoryPage() {
       <div className="section-shell">
         <div className="surface-card mb-8 rounded-[2rem] p-6 sm:p-8">
           <Link href="/cataleg" className="inline-block text-sm font-semibold uppercase tracking-[0.24em] text-amber-700 transition hover:opacity-70">
-            ← Barcha kategoriyalar
+            ← {t.categoryBack}
           </Link>
           <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#8f7a58]">Category</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#8f7a58]">{t.categoryLabel}</p>
               <h1 className="mt-2 text-4xl font-black capitalize tracking-tight text-[#24180d] md:text-5xl">
                 {category}
               </h1>
             </div>
             <span className="w-fit rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-500 shadow-sm">
-              {filteredBooks.length} ta kitob
+              {filteredBooks.length} {t.booksCount}
             </span>
           </div>
         </div>
@@ -72,11 +74,11 @@ export default function CategoryPage() {
         {filteredBooks.length === 0 ? (
           <div className="surface-card rounded-[2rem] p-10 text-center sm:p-16">
             <span className="block text-5xl">📚</span>
-            <h2 className="mt-5 text-2xl font-bold text-gray-800">Hozircha bu bo'limda kitoblar yo'q</h2>
-            <p className="mt-2 text-gray-500">Tez orada yangi adabiyotlar qo'shiladi.</p>
+            <h2 className="mt-5 text-2xl font-bold text-gray-800">{t.categoryEmptyTitle}</h2>
+            <p className="mt-2 text-gray-500">{t.categoryEmptyText}</p>
             <Link href="/" className="inline-flex">
               <button className="mt-8 rounded-xl bg-[#1A1A1A] px-8 py-3 font-bold text-white">
-                Bosh sahifaga qaytish
+                {t.backHome}
               </button>
             </Link>
           </div>

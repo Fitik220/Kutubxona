@@ -1,4 +1,5 @@
 import NavBar from "./components/Navbar";
+import { AppPreferencesProvider } from "./components/AppPreferencesProvider";
 import "./globals.css";
 
 export const metadata = {
@@ -16,8 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="uz">
       <body className="app-shell antialiased min-h-screen flex flex-col">
-        <NavBar />
-        <main className="flex-grow">{children}</main>
+        <AppPreferencesProvider>
+          <NavBar />
+          <main className="flex-grow">{children}</main>
+        </AppPreferencesProvider>
       </body>
     </html>
   );

@@ -2,8 +2,11 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Link from "next/link";
+import { AppPreferencesProvider, useAppPreferences } from "./components/AppPreferencesProvider";
 
-export default function NotFound() {
+function NotFoundContent() {
+  const { t } = useAppPreferences();
+  
   return (
     <div className="relative min-h-screen flex flex-col bg-gradient-to-b from-gray-50 via-white to-gray-100">
       <Navbar />
@@ -14,7 +17,7 @@ export default function NotFound() {
         </h1>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-3 animate-bounce">
-          Ой! Страница не найдена
+          {t.notFoundTitle}
         </h2>
 
        
@@ -22,7 +25,7 @@ export default function NotFound() {
           href="/"
           className="inline-block bg-black text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-800 hover:scale-105 transition-all duration-300"
         >
-          Вернуться домой
+          {t.notFoundButton}
         </Link>
 
         
@@ -30,5 +33,13 @@ export default function NotFound() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function NotFound() {
+  return (
+    <AppPreferencesProvider>
+      <NotFoundContent />
+    </AppPreferencesProvider>
   );
 }
