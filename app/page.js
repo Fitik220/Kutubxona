@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 
 function RevealSection({ children, className = "" }) {
   return (
-    <section className={`reveal-section ${className}`} data-reveal>
+<section className={`reveal-section ${className}`} data-reveal>
       {children}
     </section>
   );
@@ -169,7 +169,7 @@ export default function Home() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${cat.tone} opacity-80 transition group-hover:opacity-70`} />
+                 <div className={`absolute inset-0 bg-gradient-to-br ${cat.tone} opacity-80 transition group-hover:opacity-70`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
                     <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-200">{t.selectedGenre}</p>

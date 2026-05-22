@@ -1,8 +1,9 @@
-import React from "react";
+"use client";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Link from "next/link";
-import { AppPreferencesProvider, useAppPreferences } from "./components/AppPreferencesProvider";
+import { useAppPreferences } from "./components/AppPreferencesProvider";
 
 function NotFoundContent() {
   const { t } = useAppPreferences();
@@ -37,9 +38,5 @@ function NotFoundContent() {
 }
 
 export default function NotFound() {
-  return (
-    <AppPreferencesProvider>
-      <NotFoundContent />
-    </AppPreferencesProvider>
-  );
+  return <NotFoundContent />;
 }
