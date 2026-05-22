@@ -4,6 +4,11 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppPreferences } from "./components/AppPreferencesProvider";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 function RevealSection({ children, className = "" }) {
   return (
@@ -139,30 +144,45 @@ export default function Home() {
           <p className="mt-4 text-base leading-7 text-[#6f6559]">{t.collectionsText}</p>
         </div>
 
-        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
-          {categories.map((cat, index) => (
-            <Link href={`/catalog/${cat.slug}`} key={cat.id} className="flex-shrink-0 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)] snap-center">
-              <div className="group relative min-h-[380px] overflow-hidden rounded-[2rem] shadow-[0_20px_60px_rgba(34,24,12,0.16)]">
-                <Image
-                  src={cat.image}
-                  alt={cat.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className="object-cover transition duration-700 group-hover:scale-105"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-br ${cat.tone} opacity-80 transition group-hover:opacity-70`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
-                  <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-200">{t.selectedGenre}</p>
-                  <h3 className="text-3xl font-black sm:text-4xl">{cat.title}</h3>
-                  <span className="mt-4 inline-block rounded-full bg-white/15 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] backdrop-blur">
-                    {t.explore}
-                  </span>
+        <Swiper
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          spaceBetween={16}
+          slidesPerView={1}
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 16 },
+            1280: { slidesPerView: 3, spaceBetween: 16 },
+          }}
+          className="!pb-4"
+        >
+          {categories.map((cat) => (
+            <SwiperSlide key={cat.id}>
+              <Link href={`/catalog/${cat.slug}`}>
+                <div className="group relative min-h-[380px] overflow-hidden rounded-[2rem] shadow-[0_20px_60px_rgba(34,24,12,0.16)]">
+                  <Image
+                    src={cat.image}
+                    alt={cat.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${cat.tone} opacity-80 transition group-hover:opacity-70`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+                    <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-200">{t.selectedGenre}</p>
+                    <h3 className="text-3xl font-black sm:text-4xl">{cat.title}</h3>
+                    <span className="mt-4 inline-block rounded-full bg-white/15 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] backdrop-blur">
+                      {t.explore}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </RevealSection>
 
       <RevealSection className="section-shell mt-20 sm:mt-24">
@@ -187,18 +207,28 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            {categories.slice(0, 4).map((cat, index) => (
-              <div key={cat.id} className="relative overflow-hidden rounded-[1.8rem]">
-                <div className="relative h-[250px] sm:h-[300px]">
-                  <Image src={cat.image} alt={cat.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-xl font-bold text-white">{cat.title}</p>
+          <div className="flex justify-end">
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false,
+              }}
+              direction="vertical"
+              spaceBetween={16}
+              slidesPerView={3}
+              className="h-[480px] sm:h-[480px] w-full max-w-sm"
+            >
+              {categories.slice(0, 4).map((cat) => (
+                <SwiperSlide key={cat.id}>
+                  <div className="relative overflow-hidden rounded-[1.8rem] h-full">
+                    <div className="relative h-full">
+                      <Image src={cat.image} alt={cat.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </RevealSection>

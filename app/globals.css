@@ -144,3 +144,64 @@ body[data-theme="dark"] .bg-\[\#1f170e\] {
   background: #f0c178 !important;
   color: #1a1410 !important;
 }
+
+/* Swiper styles */
+.swiper {
+  overflow: hidden;
+}
+
+.swiper-slide {
+  display: flex;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background: rgba(255, 255, 255, 0.15);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.3);
+  opacity: 1;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: rgba(255, 207, 112, 1);
+  width: 30px;
+  border-radius: 5px;
+}
+
+body[data-theme="dark"] .swiper-button-next,
+body[data-theme="dark"] .swiper-button-prev {
+  background: rgba(255, 207, 112, 0.15);
+  border-color: rgba(255, 207, 112, 0.3);
+  color: #f0c178;
+}
+
+body[data-theme="dark"] .swiper-button-next:hover,
+body[data-theme="dark"] .swiper-button-prev:hover {
+  background: rgba(255, 207, 112, 0.25);
+  border-color: rgba(255, 207, 112, 0.4);
+}
